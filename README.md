@@ -11,7 +11,7 @@ sudo docker run -v path/to/your/project:/mnt/dev -w /mnt/dev --rm  --gpus all --
 ```
 
 
-### Try starting the webots，and shall see the webots jump out of the screen:
+### Try starting the webots，and shall see the webots GUI:
 
 ```bash
 webots
