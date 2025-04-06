@@ -1,0 +1,39 @@
+name: ROS2 tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  schedule:
+    - cron:  '0 02 * * *'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  industrial_ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        ROS_REPO: [main, testing]
+        ROS_DISTRO: [humble, jazzy, rolling]
+    runs-on: ubuntu-latest
+    env:
+      AFTER_INIT: ./scripts/ci_after_init.bash ${ROS_DISTRO} ${ROS_REPO}
+      BEFORE_INIT_EMBED: source scripts/ci_before_init_embed.bash ${ROS_DISTRO}
+      DOCKER_RUN_OPTS: -v /artifacts:/tmp/artifacts
+    steps:
+      - uses: actions/checkout@v3
+        with:
+         submodules: recursive
+      - uses: 'ros-industrial/industrial_ci@master'
+        env:
+          ROS_REPO: ${{matrix.ROS_REPO}}
+          ROS_DISTRO: ${{matrix.ROS_DISTRO}}
+      - name: Upload Artifact
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: generic_artifacts_${{matrix.ROS_REPO}}_${{matrix.ROS_DISTRO}}
+          path: /artifacts
+          retention-days: 5
