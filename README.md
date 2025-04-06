@@ -7,7 +7,7 @@ docker pull registry.cn-guangzhou.aliyuncs.com/ddt_robot/ubuntu:webot2023b-v1
 ### A refer to start the docker
 
 ```bash
-sudo docker run -v path/to/your/project:/mnt/dev -w /mnt/dev --rm  --gpus all --net=host --privileged -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1  -e CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -it ubuntu:webot2023b-v1
+sudo docker run -v path/to/your/project:/mnt/dev -w /mnt/dev --rm  --gpus all --net=host --privileged -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1  -e CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -it registry.cn-guangzhou.aliyuncs.com/ddt_robot/ubuntu:webot2023b-v1
 ```
 
 
@@ -46,6 +46,8 @@ cd webots_ros
 
 colcon build
 
+source install/setup.bash
+
 ```
 
 ### Now, you can go to your project file, and compile your project, for example :
@@ -69,3 +71,33 @@ apt update
 apt install ros-humble-pinocchio
 
 ```
+
+### If you meet "xcb" error :
+
+```bash
+
+#Add the following in your ~/.bashrc:
+
+xhost +
+
+```
+
+### Plaese use tensorrt and compile in the docker, rather than the host!! For example:
+
+```bash
+
+#In docker : /mnt/dev, convert the onnx to .engine:
+
+/usr/src/tensorrt/bin/trtexec --onnx=your_onnx.onnx --saveEngine=your_engine.engine
+
+```
+
+### Remember to change your engine file path under the path of docker, e.g. :
+
+```bash
+
+# /mnt/dev is the path in your docker, not int the host
+cuda_test_ = std::make_shared<CudaTest>("/mnt/dev/model_gn.engine");
+
+```
+
