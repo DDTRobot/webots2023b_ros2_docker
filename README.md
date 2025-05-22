@@ -76,6 +76,8 @@ apt update
 
 apt install ros-humble-pinocchio
 
+#Then delete the build file and build again
+
 ```
 
 ### If you meet "xcb" error :
