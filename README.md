@@ -46,9 +46,9 @@ cp -r webots_ros2 path/to/your/project
 
 ```bash
 
-./start_docker
+./start_docker #start the docker
 
-cd webots_ros
+cd webots_ros2
 
 colcon build
 
