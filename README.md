@@ -7,10 +7,10 @@ docker pull registry.cn-guangzhou.aliyuncs.com/ddt_robot/ubuntu:webot2023b-v1
 ### A refer to start the docker
 
 ```bash
-sudo docker run -v path/to/your/project:/mnt/dev -w /mnt/dev --rm  --gpus all --net=host --privileged -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1  -e CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -it registry.cn-guangzhou.aliyuncs.com/ddt_robot/ubuntu:webot2023b-v1
+sudo docker run -v path/above/your/project:/mnt/dev -w /mnt/dev --rm  --gpus all --net=host --privileged -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1  -e CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -it registry.cn-guangzhou.aliyuncs.com/ddt_robot/ubuntu:webot2023b-v1
 
-# For example:
-sudo docker run -v ~/Downloads/tita_rl_sim2sim2real:/mnt/dev -w /mnt/dev --rm  --gpus all --net=host --privileged -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1  -e CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -it registry.cn-guangzhou.aliyuncs.com/ddt_robot/ubuntu:webot2023b-v1
+# For example: Dowloads is the directory above the project tita_rl_sim2sim2real
+sudo docker run -v ~/Downloads:/mnt/dev -w /mnt/dev --rm  --gpus all --net=host --privileged -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1  -e CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda -it registry.cn-guangzhou.aliyuncs.com/ddt_robot/ubuntu:webot2023b-v1
 
 
 ```
