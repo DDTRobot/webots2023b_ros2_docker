@@ -64,7 +64,7 @@ source install/setup.bash
 
 cd tita_rl_sim2sim2real
 
-source /opt/ros/humble/setup.bash && colcon build --packages-up-to locomotion_bringup webots_bridge robot_inertia_calculator template_ros2_controller tita_controller joy_controller keyboard_controller
+source /opt/ros/humble/setup.bash && colcon build --packages-up-to locomotion_bringup webots_bridge template_ros2_controller tita_controller joy_controller keyboard_controller
 
 ```
 
